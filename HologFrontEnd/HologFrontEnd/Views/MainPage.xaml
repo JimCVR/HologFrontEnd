@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="HologFrontEnd.Views.MainPage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout 
+                Orientation="Horizontal"
+                Margin="10,7">
+                <Image
+                    Source="holog_logo.png"
+                    WidthRequest="60"
+                    HorizontalOptions="Start"
+                    Margin="10,0"/>
+                <SearchBar 
+                    TextChanged="OnTextChanged"
+                    Placeholder="Search categories..."
+                    CancelButtonColor="{StaticResource BarText}"
+                    PlaceholderColor="{StaticResource BarText}"
+                    TextColor="{StaticResource BarText}"
+                    TextTransform="Lowercase"
+                    HorizontalTextAlignment="Center"
+                    WidthRequest="270"                  
+                    FontSize="Medium"/>
+            </StackLayout>
+            <AbsoluteLayout>
+            <CollectionView
+                x:Name="categoryCanvaView">
+                <CollectionView.EmptyView>
+                    <ContentView>
+                        <StackLayout
+                            x:Name="noCategoryLayout"
+                            IsVisible="false"
+                            Margin="20,20">
+                            <Label x:Name="noCategory"
+                                Text="No has añadido ninguna categoría"
+                                FontSize="24"
+                                HorizontalTextAlignment="Center"
+                                WidthRequest="200"
+                                FontAttributes="Bold"   
+                                VerticalOptions="Center" 
+                                HorizontalOptions="CenterAndExpand"/>
+                            <Label 
+                               x:Name="addFirstCategorylabel"
+                               Text="Añade tu primera categoría o crea una completamente personalizada"
+                               FontSize="16"
+                               HorizontalTextAlignment="Center"
+                               WidthRequest="250"
+                               VerticalOptions="Center" 
+                               HorizontalOptions="CenterAndExpand"/>
+                            
+                            <Button
+                                x:Name="addFirstCategoryButton"
+                                BackgroundColor="#052E6B"
+                                Text="Crear Categoría"
+                                FontSize="20"
+                                Clicked="OnClickButton"/>
+                        </StackLayout>
+                    </ContentView>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView
+                            BackgroundColor="Transparent">
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text=" Borrar" 
+                                                BackgroundColor="red" 
+                                                IconImageSource="trash_can_regular.png" 
+                                                Clicked="SwipeItem_Erase"/>
+                                    <SwipeItem Text=" Editar"
+                                                BackgroundColor="green" 
+                                                IconImageSource="icon_note.png" 
+                                                Clicked="SwipeItem_Edit" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Frame
+                                BackgroundColor="{Binding Color}"                
+                                WidthRequest="250"
+                                HeightRequest="50"
+                                CornerRadius="12"
+                                Margin="20,10">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TappedCategory"/>
+                                </Frame.GestureRecognizers>
+                                <FlexLayout 
+                                    JustifyContent="Start">
+                                    <Image
+                                        Source="{Binding Icon}"
+                                        WidthRequest="50"
+                                        HeightRequest="50"
+                                        HorizontalOptions="Start"/>
+                                    <Label
+                                        Text="{Binding Name}"
+                                        TextColor="White"
+                                        FontSize="22"
+                                        HorizontalTextAlignment="Start"
+                                        MaxLines="1"
+                                        LineBreakMode="TailTruncation"
+                                        MinimumWidthRequest="100"
+                                        WidthRequest="280"
+                                        HeightRequest="50"
+                                        MinimumHeightRequest="50"
+                                        Margin="0,10,0,0"
+                                        Padding="15,0,0,0"/>
+                                </FlexLayout>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+ 
+            <ImageButton 
+                x:Name="addCategoryButton"    
+                Source="circle_plus_solid" 
+                BackgroundColor="Transparent"
+                CornerRadius="30"
+                AbsoluteLayout.LayoutFlags="PositionProportional"  
+                AbsoluteLayout.LayoutBounds=".93,.95,70,70"
+                xct:ShadowEffect.Color="Black"
+                xct:ShadowEffect.OffsetY="5"
+                xct:ShadowEffect.Radius="10"
+                Clicked="OnClickButton" />
+        </AbsoluteLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HologFrontEnd.Views.SearchItemView">
+  <ContentPage.Content>
+      <StackLayout Margin="20,20">
+            <SearchBar 
+                TextChanged="OnTextChanged"
+                Placeholder="Search items..."
+                CancelButtonColor="{StaticResource BarText}"
+                PlaceholderColor="{StaticResource BarText}"
+                TextColor="{StaticResource BarText}"
+                TextTransform="Lowercase"
+                HorizontalTextAlignment="Center"
+                FontSize="Medium"
+           />
+            <CollectionView x:Name="searchResults">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label 
+                                Text="{Binding name}" 
+                                LineBreakMode="TailTruncation"
+                                MaxLines="2"
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+  </ContentPage.Content>
+</ContentPage>

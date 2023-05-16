@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="HologFrontEnd.Views.ItemDetailPage"
+             Title="{Binding name}">
+
+    <ContentPage.Resources>
+        <ControlTemplate x:Key="RadioButtonControlTemplate">
+            <Frame 
+                   CornerRadius="5"
+                   HasShadow="True"
+                   Padding="3"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CheckedStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                            Value="#2f933a" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter Property="BorderColor"
+                                            Value="#F3F2F1" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+                <Frame
+                    Padding="12"
+                    HasShadow="false"
+                    CornerRadius="5">
+                    <ContentPresenter />
+                </Frame>
+            </Frame>
+        </ControlTemplate>
+        <Style TargetType="RadioButton">
+            <Setter 
+                Property="ControlTemplate"
+                Value="{StaticResource RadioButtonControlTemplate}" />
+        </Style>
+    </ContentPage.Resources>
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="15,0">
+            <Image
+                Source="core_exxet" 
+                HeightRequest="250"/>
+            <Rectangle 
+                HorizontalOptions="CenterAndExpand" 
+                BackgroundColor="#262626" 
+                HeightRequest="2" 
+                WidthRequest="400"/>
+            <FlexLayout JustifyContent="SpaceAround">
+                <Label 
+                    Text="{Binding name}" 
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    HorizontalOptions="FillAndExpand"
+                    MinimumWidthRequest="400"
+                    WidthRequest="550"
+                       
+                       MaxLines="2"
+                       LineBreakMode="TailTruncation"/>
+                <StackLayout>
+                    <FlexLayout JustifyContent="End">
+                       <Label 
+                            Text="0.0" 
+                            FontSize="24"
+                            FontAttributes="Bold"/>
+                        <Image 
+                            Source="star_solid"
+                            HeightRequest="20"
+                            Margin="5,5,5,0"/>
+                    </FlexLayout>
+                    
+                    <FlexLayout JustifyContent="End">
+                        <Label 
+                            Text="0.0" 
+                            FontSize="24"
+                            FontAttributes="Bold"/>
+                        <Image 
+                            Source="calendar_solid"
+                            HeightRequest="20"
+                            Margin="10,5,5,0"/>
+                    </FlexLayout>
+                </StackLayout>
+            </FlexLayout>
+            <Rectangle HorizontalOptions="CenterAndExpand" BackgroundColor="#262626" HeightRequest="2" WidthRequest="400"/>
+            <Label 
+                Text="{Binding description}" FontSize="Medium" 
+                LineBreakMode="TailTruncation"
+                MaxLines="5"/>
+            <Rectangle HorizontalOptions="CenterAndExpand" BackgroundColor="#262626" HeightRequest="2" WidthRequest="400"/>
+            <FlexLayout 
+                x:Name="rbFlex"
+                JustifyContent="SpaceAround"
+                RadioButtonGroup.GroupName="status">
+                <RadioButton
+                    x:Name="pending"
+                    Value="pending"
+                    CheckedChanged="StatusChanged"
+                    Content="Pendiente"/>
+                <RadioButton
+                    x:Name="inProgress"
+                    CheckedChanged="StatusChanged"
+                    Content="En progreso"
+                    Value="inProgress"/>
+                <RadioButton
+                    x:Name="complete"
+                    CheckedChanged="StatusChanged"
+                    Value="complete"
+                    Content="Completado"/>
+            </FlexLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

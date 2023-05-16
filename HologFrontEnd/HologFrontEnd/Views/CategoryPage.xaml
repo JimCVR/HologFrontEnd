@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="HologFrontEnd.Views.CategoryPage"
+             x:Name="CatPage">
+    <AbsoluteLayout>
+        <CollectionView 
+            x:Name="ItemsListView"               
+            SelectionMode="None"
+            ItemsLayout="VerticalGrid,3"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="15,15,15,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="170"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout>
+                            <Frame
+                                CornerRadius="5"
+                                HeightRequest="80"
+                                BackgroundColor="Wheat"
+                                xct:ShadowEffect.Color="Black"
+                                xct:ShadowEffect.OffsetY="5"
+                                xct:ShadowEffect.Radius="10"/>
+                            <Label 
+                                Text="{Binding name}" 
+                                LineBreakMode="TailTruncation"
+                                MaxLines="2"
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TappedItem"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <ImageButton 
+            x:Name="addCategoryButton"    
+            Source="circle_plus_solid_white" 
+            BackgroundColor="Transparent"
+            CornerRadius="30"
+            AbsoluteLayout.LayoutFlags="PositionProportional"  
+            AbsoluteLayout.LayoutBounds=".93,.95,70,70"
+            xct:ShadowEffect.Color="Black"
+            xct:ShadowEffect.OffsetY="5"
+            xct:ShadowEffect.Opacity="1"
+            xct:ShadowEffect.Radius="10"
+            Clicked="OnClickButton" />
+    </AbsoluteLayout>
+</ContentPage>

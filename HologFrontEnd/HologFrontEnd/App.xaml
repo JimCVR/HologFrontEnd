@@ -3,6 +3,48 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HologFrontEnd.App">
     <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#052E6B</Color>
+            <Color x:Key="Secondary">#b6c2ff</Color>
+            <Color x:Key="Tertiary">#d1a617</Color>
+            <Color x:Key="quaternary">#f1f1e6</Color>
+            <Color x:Key="BarText">#666666</Color>
+            <Color x:Key="variosBgColor">#B379ED</Color>
+            <Color x:Key="filmsBgColor">#D44343</Color>
+            <Color x:Key="gamesBgColor">#70BAFF</Color>
+            <Color x:Key="seriesBgColor">#F8AD55</Color>
+            <Color x:Key="booksBgColor">#67C657</Color>
 
+            <Style TargetType="{x:Type NavigationPage}" ApplyToDerivedTypes="True">
+                <Setter 
+                    Property="BarBackgroundColor"
+                    Value="transparent" />
+                <Setter 
+                    Property="BarTextColor"
+                    Value="{StaticResource BarText}" />
+            </Style>
+            <Style TargetType="{x:Type ContentPage}" ApplyToDerivedTypes="True">
+            </Style>
+            <!--Style Button-->
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="#332196F3" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
