@@ -1,5 +1,4 @@
-﻿using Android.App;
-using HologFrontEnd.Models;
+﻿using HologFrontEnd.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -24,17 +23,19 @@ namespace HologFrontEnd.Services
             try
             {
                 HttpResponseMessage response = await client.GetAsync(uri);
+                
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     categories = JsonConvert.DeserializeObject<ISet<Category>>(content);
+                    return categories;
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("\tError{0}", ex.Message);
             }
-            return categories;
+            return null;
         }
 
         public async Task<Category> GetCategoryByIdAsync(String uri)
@@ -47,26 +48,6 @@ namespace HologFrontEnd.Services
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     category = JsonConvert.DeserializeObject<Category>(content);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("\tError{0}", ex.Message);
-            }
-            return category;
-        }
-
-        public async Task<Category> createCategoryAsync(Category category, String uri)
-        {
-            try
-            {
-
-                var content = new StringContent(JsonConvert.SerializeObject(category), Encoding.UTF8, "application/json");
-
-                HttpResponseMessage response = await client.PostAsync(uri, content);
-
-                if (response.IsSuccessStatusCode)
-                {
                     return category;
                 }
             }
@@ -74,7 +55,26 @@ namespace HologFrontEnd.Services
             {
                 Debug.WriteLine("\tError{0}", ex.Message);
             }
-            return category;
+            return null;
+        }
+
+        public async Task<Category> createCategoryAsync(Category category, String uri)
+        {
+            try
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(category), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(uri, content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return category;
+                }                
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("\tError{0}", ex.Message);
+            }
+            return null;
         }
 
         public async Task<Category> updateCategoryAsync(Category category, String uri)
@@ -93,7 +93,7 @@ namespace HologFrontEnd.Services
             {
                 Debug.WriteLine("\tError{0}", ex.Message);
             }
-            return category;
+            return null;
         }
 
         public async Task<Category> deleteCategoryAsync(Category category, String uri)
@@ -110,7 +110,7 @@ namespace HologFrontEnd.Services
             {
                 Debug.WriteLine("\tError{0}", ex.Message);
             }
-            return category;
+            return null;
         }
 
     }
