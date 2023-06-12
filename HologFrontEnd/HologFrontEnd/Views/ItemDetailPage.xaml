@@ -55,6 +55,7 @@
                             Text="{Binding score}" 
                             HorizontalTextAlignment="End"
                             FontSize="20"
+                            WidthRequest="120"
                             FontAttributes="Bold"/>
                         <Image 
                             Source="star_solid"
