@@ -1,5 +1,4 @@
-﻿using Android.App;
-using HologFrontEnd.Models;
+﻿using HologFrontEnd.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -28,13 +27,14 @@ namespace HologFrontEnd.Services
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     items = JsonConvert.DeserializeObject<ISet<Item>>(content);
+                    return items;
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("\tError{0}", ex.Message);
             }
-            return items;
+            return null;
         }
 
         public async Task<Item> GetItemByIdAsync(String uri)
@@ -47,22 +47,21 @@ namespace HologFrontEnd.Services
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     item = JsonConvert.DeserializeObject<Item>(content);
+                    return item;
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("\tError{0}", ex.Message);
             }
-            return item;
+            return null;
         }
 
-        public async Task<Item> createCategoryAsync(Item item, String uri)
+        public async Task<Item> createItemAsync(Item item, String uri)
         {
             try
             {
-
                 var content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, "application/json");
-
                 HttpResponseMessage response = await client.PostAsync(uri, content);
 
                 if (response.IsSuccessStatusCode)
@@ -74,16 +73,15 @@ namespace HologFrontEnd.Services
             {
                 Debug.WriteLine("\tError{0}", ex.Message);
             }
-            return item;
+            return null;
         }
 
-        public async Task<Item> updateCategoryAsync(Item item, String uri)
+        public async Task<Item> updateItemAsync(Item item, String uri)
         {
-
             try
             {
                 var content = new StringContent(JsonConvert.SerializeObject(item), Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PutAsync(uri, content);
+                HttpResponseMessage response = await client.PutAsync(uri+item.id, content);
                 if (response.IsSuccessStatusCode)
                 {
                     return item;
@@ -93,10 +91,10 @@ namespace HologFrontEnd.Services
             {
                 Debug.WriteLine("\tError{0}", ex.Message);
             }
-            return item;
+            return null;
         }
 
-        public async Task<Item> deleteCategoryAsync(Item item, String uri)
+        public async Task<Item> deleteItemAsync(Item item, String uri)
         {
             try
             {
@@ -110,8 +108,7 @@ namespace HologFrontEnd.Services
             {
                 Debug.WriteLine("\tError{0}", ex.Message);
             }
-            return item;
+            return null;
         }
-
     }
 }

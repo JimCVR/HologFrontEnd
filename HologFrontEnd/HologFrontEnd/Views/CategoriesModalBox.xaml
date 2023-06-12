@@ -3,119 +3,116 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HologFrontEnd.Views.CategoriesModalBox">
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout
-                Padding="20,20,20,0">
-                <StackLayout.GestureRecognizers>
-                    <SwipeGestureRecognizer 
-                        Direction="Down" 
-                        Swiped="SwipeGestureRecognizer"/>
-                </StackLayout.GestureRecognizers>
-                <Frame
-                    x:Name="Peliculas"
-                    HeightRequest="70"
-                    CornerRadius="8"
-                    BackgroundColor="{StaticResource filmsBgColor}">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Tapped="TapGestureRecognizer_Tapped"/>
-                    </Frame.GestureRecognizers>
-                    <StackLayout>
-                        <Image
-                            Source="film_solid"
-                            HeightRequest="50"/>
-                        <Label 
-                            Text="Peliculas"
-                            VerticalOptions="CenterAndExpand" 
-                            HorizontalOptions="CenterAndExpand"
-                            TextColor="White"
-                            FontSize="18"/>
-                    </StackLayout>
-                </Frame>
-                <Frame
-                    x:Name="Videojuegos"
-                    HeightRequest="70"
-                    CornerRadius="8"
-                    BackgroundColor="{StaticResource gamesBgColor}">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            Tapped="TapGestureRecognizer_Tapped" />
-                    </Frame.GestureRecognizers>
-                    <StackLayout>
-                        <Image
-                            Source="gamepad_solid"
-                            HeightRequest="50"/>
-                        <Label 
-                            Text="Videojuegos"
-                            VerticalOptions="CenterAndExpand" 
-                            HorizontalOptions="CenterAndExpand"
-                            TextColor="White"
-                            FontSize="18"/>
-                    </StackLayout>
-                </Frame>
-                <Frame
-                    x:Name="Series"
-                    HeightRequest="70"
-                    CornerRadius="8"
-                    BackgroundColor="{StaticResource seriesBgColor}">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            Tapped="TapGestureRecognizer_Tapped" />
-                    </Frame.GestureRecognizers>
-                    <StackLayout>
-                        <Image
-                            Source="tv_solid"
-                            HeightRequest="50"/>
-                        <Label 
-                            Text="Series"
-                            VerticalOptions="CenterAndExpand" 
-                            HorizontalOptions="CenterAndExpand"
-                            TextColor="White"
-                            FontSize="18"/>
-                    </StackLayout>
-                </Frame>
-                <Frame
-                    x:Name="Libros"
-                    HeightRequest="70"
-                    CornerRadius="8"
-                    BackgroundColor="{StaticResource booksBgColor}">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer 
-                            Tapped="TapGestureRecognizer_Tapped" />
-                    </Frame.GestureRecognizers>
-
-                    <StackLayout>
-                        <Image
-                            Source="book_solid"
-                            HeightRequest="50"/>
-                        <Label Text="Libros"
-                            VerticalOptions="CenterAndExpand" 
-                            HorizontalOptions="CenterAndExpand"
-                            TextColor="White"
-                            FontSize="18"/>
-                    </StackLayout>
-                </Frame>
-                <Frame
-                    x:Name="Varios"
-                    HeightRequest="70"
-                    CornerRadius="8"
-                    BackgroundColor="{StaticResource variosBgColor}">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Tapped="TapGestureRecognizer_Tapped" />
-                    </Frame.GestureRecognizers>
-                    <StackLayout>
-                        <Image
-                            Source="cubes_solid"
-                            HeightRequest="50"/>
-                        <Label Text="Varios"
-                            VerticalOptions="CenterAndExpand" 
-                            HorizontalOptions="CenterAndExpand"
-                            TextColor="White"
-                            FontSize="18"/>
-                    </StackLayout>
-                </Frame>
-            </StackLayout>
-        </ScrollView>
+        <StackLayout
+                Margin="20,20,20,0">
+            <Button
+                Text="Cerrar"
+                FontSize="16"
+                TextColor="LightSkyBlue"
+                HorizontalOptions="EndAndExpand"
+                BackgroundColor="Transparent"
+                Margin="0,10"
+                 Clicked="Button_Clicked"/>
+            <Frame
+                x:Name="Peliculas"
+                HeightRequest="70"
+                CornerRadius="8"
+                BackgroundColor="{StaticResource filmsBgColor}">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Frame.GestureRecognizers>
+                <StackLayout>
+                    <Image
+                        Source="film_solid"
+                        HeightRequest="50"/>
+                    <Label 
+                        Text="Peliculas"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center"
+                        TextColor="White"
+                        FontSize="18"/>
+                </StackLayout>
+            </Frame>
+            <Frame
+                x:Name="Videojuegos"
+                HeightRequest="70"
+                CornerRadius="8"
+                BackgroundColor="{StaticResource gamesBgColor}">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Frame.GestureRecognizers>
+                <StackLayout>
+                    <Image
+                        Source="gamepad_solid"
+                        HeightRequest="50"/>
+                    <Label 
+                        Text="Videojuegos"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center"
+                        TextColor="White"
+                        FontSize="18"/>
+                </StackLayout>
+            </Frame>
+            <Frame
+                x:Name="Series"
+                HeightRequest="70"
+                CornerRadius="8"
+                BackgroundColor="{StaticResource seriesBgColor}">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Frame.GestureRecognizers>
+                <StackLayout>
+                    <Image
+                        Source="tv_solid"
+                        HeightRequest="50"/>
+                    <Label 
+                        Text="Series"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center"
+                        TextColor="White"
+                        FontSize="18"/>
+                </StackLayout>
+            </Frame>
+            <Frame
+                x:Name="Libros"
+                HeightRequest="70"
+                CornerRadius="8"
+                BackgroundColor="{StaticResource booksBgColor}">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Frame.GestureRecognizers>
+                <StackLayout>
+                    <Image
+                        Source="book_solid"
+                        HeightRequest="50"/>
+                    <Label 
+                        Text="Libros"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center"
+                        TextColor="White"
+                        FontSize="18"/>
+                </StackLayout>
+            </Frame>
+            <Frame
+                x:Name="Varios"
+                HeightRequest="70"
+                CornerRadius="8"
+                BackgroundColor="{StaticResource variosBgColor}">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Frame.GestureRecognizers>
+                <StackLayout>
+                    <Image
+                        Source="cubes_solid"
+                        HeightRequest="50"/>
+                    <Label 
+                        Text="Varios"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center"
+                        TextColor="White"
+                        FontSize="18"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

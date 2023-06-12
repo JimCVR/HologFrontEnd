@@ -2,32 +2,117 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HologFrontEnd.Views.SearchItemView">
-  <ContentPage.Content>
-      <StackLayout Margin="20,20">
+    <ContentPage.Content>
+        <StackLayout Margin="10,20">
+            <Button
+                Text="Cerrar"
+                FontSize="16"
+                TextColor="LightSkyBlue"
+                HorizontalOptions="EndAndExpand"
+                BackgroundColor="Transparent"
+                Clicked="CloseButton_Clicked"/>
             <SearchBar 
-                TextChanged="OnTextChanged"
-                Placeholder="Search items..."
+                x:Name="itemSearchBar"
+                Placeholder="Buscar"
                 CancelButtonColor="{StaticResource BarText}"
                 PlaceholderColor="{StaticResource BarText}"
                 TextColor="{StaticResource BarText}"
                 TextTransform="Lowercase"
                 HorizontalTextAlignment="Center"
-                FontSize="Medium"
-           />
+                SearchButtonPressed="SearchButtonPressed"
+                FontSize="Medium"/>
+            
             <CollectionView x:Name="searchResults">
+                <CollectionView.EmptyView>
+                    <ContentView>
+                        <StackLayout
+                            x:Name="noItemLayout"
+                            IsVisible="false"
+                            Margin="20,60,20,0"
+                            Spacing="20">
+                            <Image
+                                Source="search.png"
+                                WidthRequest="80"/>
+                            <Label x:Name="noItem"
+                                Text="¿No encuentras lo que buscas?"
+                                FontSize="24"
+                                HorizontalTextAlignment="Center"
+                                WidthRequest="200"
+                                FontAttributes="Bold"   
+                                VerticalOptions="Center"
+                                HorizontalOptions="CenterAndExpand"/>
+                            
+                            <Label 
+                               x:Name="addFirstItemlabel"
+                               Text="¡Añadelo tu mismo!"
+                               FontSize="18"
+                               HorizontalTextAlignment="Center"
+                               WidthRequest="250"
+                               VerticalOptions="Center" 
+                               HorizontalOptions="CenterAndExpand"/>
+
+                            <Button
+                                x:Name="addFirstItemButton"
+                                BackgroundColor="{StaticResource variosBgColor}"
+                                Text="Añadir"
+                                FontSize="20"
+                                Clicked="OnClickButton"/>
+                        </StackLayout>
+                    </ContentView>
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Label 
-                                Text="{Binding name}" 
-                                LineBreakMode="TailTruncation"
-                                MaxLines="2"
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
+                            <Frame
+                                BackgroundColor="#ebeced"                                               
+                                CornerRadius="3"
+                                Margin="0,5">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                </Frame.GestureRecognizers>
+                                <StackLayout Orientation="Horizontal">
+                                    <Image
+                                        Source="{Binding picture}"
+                                        Aspect="AspectFit"
+                                        WidthRequest="60"/>
+                                    <StackLayout Margin="15,0">
+                                        <Label
+                                            Text="{Binding name}"
+                                            TextColor="{StaticResource BarText}"
+                                            FontSize="16"
+                                            HorizontalTextAlignment="Start"
+                                            Style="{DynamicResource ListItemTextStyle}"
+                                            VerticalOptions="Center"/>
+                                        <StackLayout Orientation="Horizontal" Spacing="5">
+                                            <Image
+                                                Source="star_solid.png"
+                                                WidthRequest="15"/>
+                                            <Label
+                                                Text="{Binding score}"
+                                                TextColor="{StaticResource BarText}"
+                                                FontSize="16"
+                                                HorizontalTextAlignment="Start"
+                                                Style="{DynamicResource ListItemTextStyle}"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Image
+                                                Source="calendar_solid.png"
+                                                WidthRequest="15"/>
+                                            <Label
+                                                Text="{Binding date}"
+                                                TextColor="{StaticResource BarText}"
+                                                FontSize="16"
+                                                HorizontalTextAlignment="Start"
+                                                VerticalTextAlignment="End"
+                                                Style="{DynamicResource ListItemTextStyle}"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </StackLayout>
-  </ContentPage.Content>
+    </ContentPage.Content>
 </ContentPage>

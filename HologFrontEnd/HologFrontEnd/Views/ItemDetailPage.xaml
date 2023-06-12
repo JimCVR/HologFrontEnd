@@ -1,121 +1,119 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-             x:Class="HologFrontEnd.Views.ItemDetailPage"
-             Title="{Binding name}">
-
+             x:Class="HologFrontEnd.Views.ItemDetailPage">
+    
     <ContentPage.Resources>
         <ControlTemplate x:Key="RadioButtonControlTemplate">
-            <Frame 
-                   CornerRadius="5"
-                   HasShadow="True"
-                   Padding="3"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center">
+            <Frame  
+                CornerRadius="5"
+                WidthRequest="300"
+                HasShadow="True">
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CheckedStates">
                             <VisualState x:Name="Checked">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor"
-                                            Value="#2f933a" />
+                                    <Setter Property="BackgroundColor" Value="{StaticResource gamesBgColor}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Unchecked">
                                 <VisualState.Setters>
-                                    <Setter Property="BorderColor"
-                                            Value="#F3F2F1" />
+                                    <Setter Property="BorderColor" Value="#F3F2F1" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
                     </VisualStateGroupList>
                 </VisualStateManager.VisualStateGroups>
-                <Frame
-                    Padding="12"
-                    HasShadow="false"
-                    CornerRadius="5">
-                    <ContentPresenter />
-                </Frame>
+                <ContentPresenter HorizontalOptions="Center"/>
             </Frame>
         </ControlTemplate>
         <Style TargetType="RadioButton">
-            <Setter 
-                Property="ControlTemplate"
-                Value="{StaticResource RadioButtonControlTemplate}" />
+            <Setter Property="ControlTemplate" Value="{StaticResource RadioButtonControlTemplate}" />
         </Style>
     </ContentPage.Resources>
     <ScrollView>
-        <StackLayout Spacing="20" Padding="15,0">
+        <StackLayout Spacing="20" Margin="15,15">
             <Image
-                Source="core_exxet" 
+                Source="{Binding picture}" 
                 HeightRequest="250"/>
             <Rectangle 
                 HorizontalOptions="CenterAndExpand" 
                 BackgroundColor="#262626" 
                 HeightRequest="2" 
                 WidthRequest="400"/>
-            <FlexLayout JustifyContent="SpaceAround">
-                <Label 
+            <StackLayout Orientation="Horizontal">
+                <Label
                     Text="{Binding name}" 
                     FontSize="24"
                     FontAttributes="Bold"
-                    HorizontalOptions="FillAndExpand"
-                    MinimumWidthRequest="400"
-                    WidthRequest="550"
-                       
-                       MaxLines="2"
-                       LineBreakMode="TailTruncation"/>
-                <StackLayout>
-                    <FlexLayout JustifyContent="End">
-                       <Label 
-                            Text="0.0" 
-                            FontSize="24"
+                    HorizontalTextAlignment="Start"
+                    WidthRequest="200"/>
+                <StackLayout HorizontalOptions="End">
+                    <StackLayout x:Name="scoreLayout" Orientation="Horizontal">
+                        <Label 
+                            Text="{Binding score}" 
+                            HorizontalTextAlignment="End"
+                            FontSize="20"
+                            WidthRequest="120"
                             FontAttributes="Bold"/>
                         <Image 
                             Source="star_solid"
+                            HorizontalOptions="End"
                             HeightRequest="20"
-                            Margin="5,5,5,0"/>
-                    </FlexLayout>
-                    
-                    <FlexLayout JustifyContent="End">
+                            Margin="0,0,-2,0"/>
+                    </StackLayout>
+                    <StackLayout x:Name="dateLayout" Orientation="Horizontal">
                         <Label 
-                            Text="0.0" 
-                            FontSize="24"
+                            Text="{Binding date}" 
+                            HorizontalTextAlignment="End"
+                            FontSize="16"
+                            WidthRequest="120"
                             FontAttributes="Bold"/>
                         <Image 
                             Source="calendar_solid"
                             HeightRequest="20"
-                            Margin="10,5,5,0"/>
-                    </FlexLayout>
+                            Margin="0,0,0,0"/>
+                    </StackLayout>
                 </StackLayout>
-            </FlexLayout>
-            <Rectangle HorizontalOptions="CenterAndExpand" BackgroundColor="#262626" HeightRequest="2" WidthRequest="400"/>
-            <Label 
-                Text="{Binding description}" FontSize="Medium" 
-                LineBreakMode="TailTruncation"
-                MaxLines="5"/>
-            <Rectangle HorizontalOptions="CenterAndExpand" BackgroundColor="#262626" HeightRequest="2" WidthRequest="400"/>
-            <FlexLayout 
+            </StackLayout>
+            <Rectangle x:Name="descRectangle" HorizontalOptions="CenterAndExpand" BackgroundColor="#262626" HeightRequest="2" WidthRequest="400"/>
+            <Label x:Name="descriptionLabel" Text="{Binding description}" FontSize="Medium"/>
+            <Rectangle x:Name="radioButtonRect" HorizontalOptions="CenterAndExpand" BackgroundColor="#262626" HeightRequest="2" WidthRequest="400"/>
+            <StackLayout  
                 x:Name="rbFlex"
-                JustifyContent="SpaceAround"
+                HorizontalOptions="CenterAndExpand"
+                Spacing="10"
+                Margin="0,15"
                 RadioButtonGroup.GroupName="status">
                 <RadioButton
                     x:Name="pending"
                     Value="pending"
-                    CheckedChanged="StatusChanged"
-                    Content="Pendiente"/>
+                    HorizontalOptions="Center"
+                    Content="Pendiente">
+                    <RadioButton.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TappedButton"/>
+                    </RadioButton.GestureRecognizers>
+                </RadioButton>
                 <RadioButton
                     x:Name="inProgress"
-                    CheckedChanged="StatusChanged"
                     Content="En progreso"
-                    Value="inProgress"/>
+                    HorizontalOptions="Center"
+                    Value="inProgress">
+                    <RadioButton.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TappedButton"/>
+                    </RadioButton.GestureRecognizers>
+                </RadioButton>
                 <RadioButton
                     x:Name="complete"
-                    CheckedChanged="StatusChanged"
+                    HorizontalOptions="Center"
                     Value="complete"
-                    Content="Completado"/>
-            </FlexLayout>
+                    Content="Completado">
+                    <RadioButton.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TappedButton"/>
+                    </RadioButton.GestureRecognizers>
+                </RadioButton>
+            </StackLayout>
         </StackLayout>
     </ScrollView>
 </ContentPage>
